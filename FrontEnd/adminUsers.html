@@ -24,62 +24,44 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <nav>
-            <div class="logo-name">
-                <div class="logo-image">
-                    <img src="images/logo.png" alt>
-                </div>
+<!-- Sidebar Navigation -->
+<nav>
+  <div class="logo-name">
+    <div class="logo-image">
+      <img src="images/logo.png" alt />
+    </div>
+    <span class="logo_name">Safar.com</span>
+  </div>
 
-                <span class="logo_name">Safar.com</span>
-            </div>
+  <!-- Make full menu scrollable -->
+  <div class="menu-items">
 
-            <div class="menu-items">
-                <ul class="nav-links">
-                    <li><a href="./adminDashboard.html">
-                            <i class="uil uil-estate"></i>
-                            <span class="link-name">Dahsboard</span>
-                        </a></li>
-                    <li><a href="./adminUsers.html">
-                            <i class="fi fi-rs-user"></i>
-                            <span class="link-name">Users</span>
-                        </a></li>
-                    <li><a href="./adminBuses.html">
-                            <i class="fi fi-rr-bus"></i>
-                            <span class="link-name">Buses</span>
-                        </a></li>
-                    <li><a href="./adminReservation.html">
-                            <i class="fi fi-rr-memo-circle-check"></i>
-                            <span class="link-name">Reservations</span>
-                        </a></li>
-                    <li><a href="./adminfeedback.html">
-                            <i class="fi fi-rr-smiley-comment-alt"></i>
-                            <span class="link-name">FeedBacks</span>
-                        </a></li>
-                    <li><a href="./adminRoutes.html">
-                            <i class="fi fi-rs-route"></i>
-                            <span class="link-name">Routes</span>
-                        </a></li>
-                </ul>
+    <!-- Top navigation links -->
+    <div class="nav-section">
+      <ul class="nav-links">
+        <li><a href="./adminDashboard.html"><i class="uil uil-estate"></i><span class="link-name">Dashboard</span></a></li>
+        <li><a href="./adminUsers.html"><i class="fi fi-rs-user"></i><span class="link-name">Users</span></a></li>
+        <li><a href="./adminBuses.html"><i class="fi fi-rr-bus"></i><span class="link-name">Buses</span></a></li>
+        <li><a href="./adminReservation.html"><i class="fi fi-rr-memo-circle-check"></i><span class="link-name">Reservations</span></a></li>
+        <li><a href="./adminfeedback.html"><i class="fi fi-rr-smiley-comment-alt"></i><span class="link-name">FeedBacks</span></a></li>
+        <li><a href="./adminRoutes.html"><i class="fi fi-rs-route"></i><span class="link-name">Routes</span></a></li>
+      </ul>
+    </div>
 
-                <ul class="logout-mode">
-                    <li><a id="popupButton">
-                        <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
-                    </a></li>
+    <!-- Bottom sticky logout and mode -->
+    <div class="nav-bottom">
+      <ul class="logout-mode">
+        <li><a id="popupButton"><i class="uil uil-signout"></i><span class="link-name">Logout</span></a></li>
+        <li class="mode">
+          <a><i class="uil uil-moon"></i><span class="link-name">Dark Mode</span></a>
+          <div class="mode-toggle"><span class="switch"></span></div>
+        </li>
+      </ul>
+    </div>
 
-                    <li class="mode">
-                        <a href="#">
-                            <i class="uil uil-moon"></i>
-                            <span class="link-name">Dark Mode</span>
-                        </a>
+  </div>
+</nav>
 
-                        <div class="mode-toggle">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
 
         <section class="dashboard">
             <div class="top">
@@ -99,8 +81,9 @@
                         <span class="text">Users</span>
                     </div>
 
-                    <div class="field" id="field">
-                        <table>
+<div class="field table-container" id="field">
+  <table class="styled-table">
+
                             <thead>
                                 <tr class="table100-head">
                                     <th class="column1">User Id</th>

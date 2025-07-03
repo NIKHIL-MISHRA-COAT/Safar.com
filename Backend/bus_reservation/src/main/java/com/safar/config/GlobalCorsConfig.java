@@ -14,7 +14,7 @@ public class GlobalCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOriginPatterns("http://127.0.0.1:5500") // your frontend origin
+                    .allowedOriginPatterns("http://192.168.0.106:5500/") // your frontend origin
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
                     .allowCredentials(true);

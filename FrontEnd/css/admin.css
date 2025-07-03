@@ -463,3 +463,116 @@ nav.close ~ .dashboard{
         width: 100%;
     }
 }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.section-header .title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-bus-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 22px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-bus-btn:hover {
+  background-color: #218838;
+}
+
+/* Section header layout fix */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.section-header .title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-bus-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 22px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-bus-btn:hover {
+  background-color: #218838;
+}
+
+/* Table responsiveness */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.styled-table {
+  width: 100%;
+  min-width: 1000px; /* Ensure table doesn't break on small screens */
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.styled-table thead {
+  background-color: #0a53be;
+  color: white;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Make nav scrollable and full height */
+nav {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Ensure menu fills space and logout sticks to bottom */
+.menu-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Optional: prevent horizontal scroll issues */
+nav::-webkit-scrollbar {
+  width: 6px;
+}
+nav::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}

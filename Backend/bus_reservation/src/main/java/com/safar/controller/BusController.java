@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/safar")
 public class BusController {
 
@@ -36,6 +35,12 @@ public class BusController {
         Bus newBus = busServ.updateBus(bus,key);
         return new ResponseEntity<>(newBus,HttpStatus.OK);
     }
+    @GetMapping("/bus/count")
+public ResponseEntity<Integer> getBusCount() throws BusException {
+    List<Bus> allBuses = busServ.viewAllBuses();
+    return new ResponseEntity<>(allBuses.size(), HttpStatus.OK);
+}
+
 
 
 

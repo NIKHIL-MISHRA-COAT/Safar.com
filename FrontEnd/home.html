@@ -1,16 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="icon" href="./data/logo.png" type="image/icon type">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bus Reservation - Safar</title>
+  <link rel="stylesheet" href="./css/table.css" />
+  <link rel="stylesheet" href="./css/user.css" />
 </head>
 <body>
-    
+
+  <header>
+    <h1>Welcome to Safar Bus Reservation</h1>
+    <button onclick="logout()" style="float: right; margin: 10px;">Logout</button>
+  </header>
+
+  <main>
+    <h2>Available Buses</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Bus ID</th>
+          <th>Bus Name</th>
+          <th>Driver</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Date</th>
+          <th>Departure</th>
+          <th>Seats</th>
+          <th>Fare</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="busTableBody"></tbody>
+    </table>
+
+    <h2>Your Reservations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Reservation ID</th>
+          <th>Bus Name</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Journey Date</th>
+          <th>Seats Booked</th>
+          <th>Fare</th>
+        </tr>
+      </thead>
+      <tbody id="reservationTableBody"></tbody>
+    </table>
+  </main>
+
+  <script>
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData || !userData.uuid || !userData.userID) {
+      alert("You must be logged in.");
+      window.location.href = "./login.html";
+    }
+
+    // Load Buses
+    fetch("http://localhost:8080/safar/bus/all")
+      .then(res => res.json())
+      .then(buses => {
+        const tbody = document.getElementById("busTableBody");
+        buses.forEach(bus => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${bus.busId}</td>
+            <td>${bus.busName}</td>
+            <td>${bus.driverName}</td>
+            <td>${bus.routeFrom}</td>
+            <td>${bus.routeTo}</td>
+            <td>${bus.busJourneyDate}</td>
+            <td>${bus.departureTime}</td>
+            <td>${bus.availableSeats}</td>
+            <td>₹${bus.fare}</td>
+            <td><button onclick="reserveBus(${bus.busId}, '${bus.routeFrom}', '${bus.routeTo}', '${bus.busJourneyDate}', ${bus.availableSeats})">Reserve</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+
+    // Reserve a seat
+    function reserveBus(busId, from, to, journeyDate, availableSeats) {
+      const seatsStr = prompt(`Enter number of seats to reserve (Available: ${availableSeats}):`);
+      const noOfSeats = Number(seatsStr);
+
+      if (!seatsStr || isNaN(noOfSeats) || noOfSeats <= 0 || noOfSeats > availableSeats) {
+        return alert("Invalid number of seats.");
+      }
+
+      const reservationData = {
+        busId,
+        userId: userData.userID,
+        source: from,
+        destination: to,
+        journeyDate,
+        bookedSeat: noOfSeats
+      };
+
+      fetch(`http://localhost:8080/safar/user/reservation/add?key=${userData.uuid}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reservationData)
+      })
+        .then(res => {
+          if (!res.ok) return res.json().then(err => { throw new Error(err.message); });
+          return res.json();
+        })
+        .then(() => {
+          alert("Reservation successful!");
+          location.reload();
+        })
+        .catch(err => alert("Reservation failed: " + err.message));
+    }
+
+    // Load User Reservations
+   fetch(`http://localhost:8080/safar/user/reservation/${userData.userID}?key=${userData.uuid}`)
+  .then(res => res.json())
+  .then(reservations => {
+    console.log(reservations); // ✅ Correct way to log the parsed JSON
+
+    const tbody = document.getElementById("reservationTableBody");
+    reservations.forEach(r => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${r.reservationID}</td>
+        <td>${r.bus.busName}</td>
+        <td>${r.source}</td>
+        <td>${r.destination}</td>
+        <td>${r.journeyDate}</td>
+        <td>${r.bookedSeat}</td>
+        <td>₹${r.bus.fare * r.bookedSeat}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(() => {
+    const tbody = document.getElementById("reservationTableBody");
+    tbody.innerHTML = "<tr><td colspan='7'>No reservations found.</td></tr>";
+  });
+
+
+    function logout() {
+      localStorage.removeItem("userData");
+      window.location.href = "./login.html";
+    }
+  </script>
 </body>
 </html>
-
-<script src="./js/home.js"></script>

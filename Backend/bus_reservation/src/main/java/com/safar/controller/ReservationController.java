@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/safar")
 public class ReservationController {
     @Autowired
@@ -40,6 +39,11 @@ public class ReservationController {
 
         return new ResponseEntity<>(reservation, HttpStatus.ACCEPTED);
     }
+     @GetMapping("/reservation/count")
+public ResponseEntity<Integer> getReservationCount() {
+    int count = service.getReservationCount();
+    return new ResponseEntity<>(count, HttpStatus.OK);
+}
 
     @GetMapping("/reservation/{rid}")
     public ResponseEntity<Reservation> viewReservationById(@PathVariable Integer rid, @RequestParam(required = false) String key) throws ReservationException {
@@ -61,4 +65,6 @@ public class ReservationController {
 
         return  new ResponseEntity<>(reservations, HttpStatus.FOUND);
     }
+   
+
 }

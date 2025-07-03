@@ -15,7 +15,6 @@ import com.safar.service.RouteService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/safar")
 public class RouteController {
 	
@@ -37,6 +36,12 @@ public class RouteController {
 		
 		return new ResponseEntity<>(route,HttpStatus.OK);
 	}
+        @GetMapping("/route/count")
+public ResponseEntity<Integer> getRouteCount() {
+    int count = routeService.getRouteCount();
+    return new ResponseEntity<>(count, HttpStatus.OK);
+}
+
 	
 
 	@GetMapping("/route/{routeID}")
@@ -64,5 +69,6 @@ public class RouteController {
 		
 		return new ResponseEntity<Route>(route,HttpStatus.OK);
 	}
+        
 	
 }

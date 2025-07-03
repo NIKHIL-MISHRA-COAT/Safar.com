@@ -30,6 +30,11 @@ public class RouteServiceImpl implements RouteService{
 	
 	@Autowired
 	private AdminRepository  adminrepository;
+        
+        @Override
+public int getRouteCount() {
+    return (int) routerepository.count();
+}
 	
 	
 	

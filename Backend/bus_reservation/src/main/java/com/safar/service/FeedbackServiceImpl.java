@@ -88,6 +88,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 		else
 		    throw new FeedBackException("No feedback found!");
 	}
+        @Override
+public int getFeedbackCount() {
+    return (int) fdao.count();
+}
 
 	@Override
 	public Feedback viewFeedback(Integer id) throws FeedBackException {

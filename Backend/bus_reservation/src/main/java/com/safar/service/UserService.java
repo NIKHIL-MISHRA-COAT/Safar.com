@@ -12,4 +12,6 @@ public interface UserService {
     public User deleteUser(Integer userId, String key) throws UserException, AdminException;
     public User viewUserById(Integer userId, String key) throws UserException, AdminException;
     public List<User> viewAllUser(String key) throws UserException, AdminException;
+    long countAllUsers();
+
 }

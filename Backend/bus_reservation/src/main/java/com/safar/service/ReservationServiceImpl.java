@@ -162,6 +162,10 @@ public class ReservationServiceImpl implements ReservationService{
         
         return reservation;
     }
+    @Override
+public int getReservationCount() {
+    return (int) reservationRepository.count();
+}
 
     @Override
     public Reservation updateReservation(Integer rid, ReservationDTO dto, String key) throws ReservationException {

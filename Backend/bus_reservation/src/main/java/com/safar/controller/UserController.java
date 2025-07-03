@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/safar")
 public class UserController {
 
@@ -55,5 +54,10 @@ public class UserController {
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 
     }
+    @GetMapping("/user/count")
+public ResponseEntity<Long> getUserCount() {
+    long count = userService.countAllUsers();
+    return new ResponseEntity<>(count, HttpStatus.OK);
+}
 
 }

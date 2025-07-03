@@ -18,12 +18,18 @@ import com.safar.service.FeedbackService;
 
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/safar")
 public class FeedbackController {
 	
 	@Autowired
 	private FeedbackService feedbackService;
+        
+        @GetMapping("/feedback/count")
+public ResponseEntity<Integer> getFeedbackCount() throws FeedBackException {
+    List<Feedback> allFeedbacks = feedbackService.viewFeedbackAll();
+    return new ResponseEntity<>(allFeedbacks.size(), HttpStatus.OK);
+}
+
 	
 	@PostMapping("/user/feedback/add/{busId}")
 	public ResponseEntity<Feedback> addFeedback(@Valid @RequestBody Feedback feedback,

@@ -65,4 +65,11 @@ public class UserServiceImpl implements UserService{
         if(list.isEmpty())  throw new UserException("No users found!");
         return list;
     }
+    
+
+@Override
+public long countAllUsers() {
+    return userRepository.count();
+}
+
 }

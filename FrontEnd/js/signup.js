@@ -34,7 +34,7 @@
         document.querySelector("#error").classList.remove("open-error");
       }
 
-     function login(event) {
+    function login(event) {
   event.preventDefault();
 
   const email = document.querySelector("#loginEmail").value.trim();
@@ -49,11 +49,8 @@
     if (!res.ok) {
       return res.text().then(text => {
         let errorMessage = "Login failed. Please try again.";
-
         try {
           const errorObj = JSON.parse(text);
-
-          // Specific error check
           if (
             errorObj.message &&
             errorObj.message.toLowerCase().includes("user already logged")
@@ -62,11 +59,9 @@
           } else {
             errorMessage = errorObj.details || errorObj.message || errorMessage;
           }
-
         } catch (e) {
           errorMessage = text || errorMessage;
         }
-
         throw new Error(errorMessage);
       });
     }
@@ -74,8 +69,16 @@
   })
   .then(data => {
     console.log("Login Success:", data);
+
+    // ✅ Save to localStorage
+    localStorage.setItem("userData", JSON.stringify(data));
+
+    // Show success message
     document.querySelector("#success .message p").innerText = "Login successful!";
     document.querySelector("#success").classList.add("open-success");
+
+    // (Optional) Redirect user to home/dashboard page
+     window.location.href = "home.html";
   })
   .catch(err => {
     console.error("Login failed:", err.message);
@@ -83,6 +86,7 @@
     document.querySelector("#error").classList.add("open-error");
   });
 }
+
 
     function signupUser(event) {
   event.preventDefault();

@@ -48,6 +48,10 @@ public class BusServiceImpl implements BusService{
         //saving bus
         return busRepo.save(bus);
     }
+    @Override
+public int getBusCount() {
+    return (int) busRepo.count();
+}
 
     @Override
     public Bus updateBus(Bus bus, String key) throws BusException , AdminException{

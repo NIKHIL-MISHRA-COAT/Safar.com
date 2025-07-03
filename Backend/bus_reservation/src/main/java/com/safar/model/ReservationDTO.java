@@ -15,19 +15,27 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationDTO {
-    @NotNull(message = "Source required to book a reservation")
-    @NotBlank(message = "Source should not be blanked")
+
+    @NotNull(message = "Bus ID is required")
+    private Integer busId;
+
+    @NotNull(message = "User ID is required")
+    private Integer userId;
+
+    @NotNull(message = "Source is required")
+    @NotBlank(message = "Source cannot be blank")
     private String source;
 
-    @NotNull(message = "Destination required to book a reservation")
-    @NotBlank(message = "Destination should not be blanked")
+    @NotNull(message = "Destination is required")
+    @NotBlank(message = "Destination cannot be blank")
     private String destination;
 
-    @NotNull
+    @NotNull(message = "Journey Date is required")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate journeyDate;
 
-    @Min(1)
+    @NotNull(message = "Booked seat count is required")
+    @Min(value = 1, message = "At least one seat must be booked")
     private Integer bookedSeat;
 }

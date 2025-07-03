@@ -20,5 +20,7 @@ public interface FeedbackService {
 	public Feedback viewFeedback(Integer id) throws FeedBackException;
 
 	public List<Feedback> viewFeedbackAll() throws FeedBackException;
+        int getFeedbackCount();
+
 	
 }
